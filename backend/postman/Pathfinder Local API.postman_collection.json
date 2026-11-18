@@ -1,0 +1,112 @@
+{
+  "info": {
+    "_postman_id": "234416d7-36d3-4f20-a927-8d9002b7c914",
+    "name": "Pathfinder Local API",
+    "description": "Local Spring Boot and Ollama APIs. Set baseUrl and usn variables before use.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "usn", "value": "DEMO001" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      }
+    },
+    {
+      "name": "Student sign in",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"usn\":\"{{usn}}\"}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Get progress",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/progress/{{usn}}"
+      }
+    },
+    {
+      "name": "Save progress",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"completedProblems\":[1,4],\"assessmentAnswers\":{\"hashing\":\"Storing pairs with fast lookups\"}}"
+        },
+        "url": "{{baseUrl}}/api/progress/{{usn}}"
+      }
+    },
+    {
+      "name": "Generate interview question",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"category\":\"Java\",\"difficulty\":\"Medium\"}"
+        },
+        "url": "{{baseUrl}}/api/mock-interviews/question"
+      }
+    },
+    {
+      "name": "Score interview answer",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"question\":\"Explain how a hash map works.\",\"transcript\":\"A hash map stores key and value pairs. It hashes the key to choose a bucket, then handles collisions within that bucket.\"}"
+        },
+        "url": "{{baseUrl}}/api/mock-interviews/score"
+      }
+    },
+    {
+      "name": "Review code",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"language\":\"Java\",\"problem\":\"Return two indices whose values sum to target.\",\"code\":\"class Solution { int[] twoSum(int[] a, int t) { return new int[0]; } }\"}"
+        },
+        "url": "{{baseUrl}}/api/code-review"
+      }
+    },
+    {
+      "name": "Analyze resume",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"resumeText\":\"Computer science student. Built a Java and MySQL placement portal.\",\"jobDescription\":\"Entry-level Java developer\"}"
+        },
+        "url": "{{baseUrl}}/api/resume/analyze"
+      }
+    },
+    {
+      "name": "Create learning plan",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"goal\":\"Prepare for placement interviews\",\"weakTopics\":[\"Java\",\"SQL\",\"DSA\"],\"completedProblems\":[\"Two Sum\"],\"hoursPerWeek\":5}"
+        },
+        "url": "{{baseUrl}}/api/learning-plan"
+      }
+    }
+  ]
+}
