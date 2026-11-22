@@ -7,3 +7,6 @@
 *.log
 .idea/
 .vscode/
+
+.env
+**/.env
